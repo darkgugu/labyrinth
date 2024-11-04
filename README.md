@@ -11,7 +11,8 @@ Ce projet à été réalisé dans le cadre du cours Tests Unitaires par des él�
 Ce projet utilise les technologies et outils suivants :
 - React
 - Node.js
-- Firebase
+- Firebase App Hosting
+- Firebase Realtime Database
 - labyrinthAPI
 - Jest
 - React Testing Library
