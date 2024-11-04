@@ -3,9 +3,9 @@ Labyrinth est un jeu qui propose chaque jour un nouveau labyrinthe à résoudre 
 
 ## Auteurs
 Ce projet à été réalisé dans le cadre du cours Tests Unitaires par des élèves de l'ESGI Reims en B3 Ingénierie du Web
-* Giacomo Boscher
+* Giacomo Pernice
 * Icham Duret
-* Louis Guillerm
+* Louis Constant
 
 ## Technologies et outils
 Ce projet utilise les technologies et outils suivants :
