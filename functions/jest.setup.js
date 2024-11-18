@@ -1,0 +1,1 @@
+process.env.GCLOUD_PROJECT = "labyrinth-b3test";
