@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { callApi } = require("../index");
+const { callApi } = require("../callApi");
 const walls = require("../walls")
 //const functions = require("firebase-functions/v1");
 
