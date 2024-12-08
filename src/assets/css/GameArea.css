@@ -1,0 +1,15 @@
+.GameArea {
+  height: 75%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.GameArea .gameWindow {
+  border: 2px solid black;
+  width: 600px;
+  height: 600px;
+  background-color: aliceblue;
+  display: flex;
+  flex-wrap: wrap;
+}/*# sourceMappingURL=GameArea.css.map */

@@ -1,0 +1,21 @@
+.Footer{
+    border-top: 1px solid black;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    //background-color: white;
+
+    p{
+        margin: 2px;
+        a{
+            font-weight: bold;
+            text-decoration: none;
+            color: #00008B;
+        }
+    }
+}

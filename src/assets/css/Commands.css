@@ -1,0 +1,10 @@
+.Commands {
+  height: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.Commands .bottomRow {
+  display: flex;
+}/*# sourceMappingURL=Commands.css.map */

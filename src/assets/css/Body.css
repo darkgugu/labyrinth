@@ -1,0 +1,11 @@
+.Body {
+  display: flex;
+  background-color: #D3D3D3;
+  height: 100%;
+}
+.Body .leftPart {
+  width: 50%;
+}
+.Body .rightPart {
+  width: 50%;
+}/*# sourceMappingURL=Body.css.map */
