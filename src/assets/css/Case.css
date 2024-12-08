@@ -3,4 +3,12 @@
   height: 38px;
   background-color: aliceblue;
   border: 1px solid aliceblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Case #player {
+  background-color: red;
+  height: 15px;
+  width: 15px;
 }/*# sourceMappingURL=Case.css.map */

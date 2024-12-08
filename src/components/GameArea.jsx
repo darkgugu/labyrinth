@@ -7,6 +7,7 @@ import { Case } from './Case'
 
 export const GameArea = () => {
 	const [walls, setWalls] = useState(null)
+	const [playerPosition, setPlayerPosition] = useState([0, 0])
 
 	useEffect(() => {
 		// Fetch walls data from Realtime Database
@@ -28,7 +29,7 @@ export const GameArea = () => {
 		fetchWalls()
 	}, [])
 
-	if (!walls) return <div>Loading...</div>
+	if (!walls) return <div></div>
 
 	const checkForWalls = (matrice, position) => {
 		if (matrice[position[0]][position[1]] === 1) {
@@ -53,14 +54,66 @@ export const GameArea = () => {
 							? '1px solid black'
 							: null
 					}
+					isPlayerHere={
+						playerPosition[0] === i && playerPosition[1] === j
+					}
 				/>
 			)
 		}
 	}
 
+	const handleKeyDown = (e) => {
+		switch (e.key) {
+			case 'ArrowUp':
+			case 'z':
+				if (outOfBoundsMove('up', playerPosition)) {
+					break
+				}
+				setPlayerPosition([playerPosition[0] - 1, playerPosition[1]])
+				break
+			case 'ArrowLeft':
+			case 'q':
+				if (outOfBoundsMove('left', playerPosition)) {
+					break
+				}
+				setPlayerPosition([playerPosition[0], playerPosition[1] - 1])
+				break
+			case 'ArrowDown':
+			case 's':
+				if (outOfBoundsMove('down', playerPosition)) {
+					break
+				}
+				setPlayerPosition([playerPosition[0] + 1, playerPosition[1]])
+				break
+			case 'ArrowRight':
+			case 'd':
+				if (outOfBoundsMove('right', playerPosition)) {
+					break
+				}
+				setPlayerPosition([playerPosition[0], playerPosition[1] + 1])
+				break
+			default:
+				break
+		}
+	}
+
+	const outOfBoundsMove = (direction, position) => {
+		if (position[0] === 0 && direction === 'up') {
+			return true
+		} else if (position[0] === 14 && direction === 'down') {
+			return true
+		} else if (position[1] === 0 && direction === 'left') {
+			return true
+		} else if (position[1] === 14 && direction === 'right') {
+			return true
+		}
+	}
+
 	return (
 		<div className="GameArea">
-			<div className="gameWindow">{caseArray}</div>
+			<div className="gameWindow" onKeyDown={handleKeyDown} tabIndex={0}>
+				{caseArray}
+			</div>
 		</div>
 	)
 }

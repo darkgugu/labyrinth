@@ -1,6 +1,6 @@
 import '../assets/css/Case.css'
 
-export const Case = ({ borderLeft, borderTop }) => {
+export const Case = ({ borderLeft, borderTop, isPlayerHere }) => {
 	//const borderLeft = '1px solid black'
 	//const borderTop = '1px solid black'
 
@@ -8,6 +8,8 @@ export const Case = ({ borderLeft, borderTop }) => {
 		<div
 			className="Case"
 			style={{ borderLeft: `${borderLeft}`, borderTop: `${borderTop}` }}
-		></div>
+		>
+			{isPlayerHere ? <div id="player"></div> : null}
+		</div>
 	)
 }
