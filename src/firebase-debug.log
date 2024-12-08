@@ -1,0 +1,154 @@
+[debug] [2024-12-08T00:48:37.962Z] ----------------------------------------------------------------------
+[debug] [2024-12-08T00:48:37.963Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\icham\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only functions
+[debug] [2024-12-08T00:48:37.964Z] CLI Version:   13.23.1
+[debug] [2024-12-08T00:48:37.964Z] Platform:      win32
+[debug] [2024-12-08T00:48:37.964Z] Node Version:  v18.17.1
+[debug] [2024-12-08T00:48:37.965Z] Time:          Sun Dec 08 2024 01:48:37 GMT+0100 (heure normale d’Europe centrale)
+[debug] [2024-12-08T00:48:37.965Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-12-08T00:48:38.037Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-12-08T00:48:38.037Z] > authorizing via signed-in user (icham.duret14@gmail.com)
+[debug] [2024-12-08T00:48:38.037Z] [iam] checking project labyrinth-b3test for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2024-12-08T00:48:38.038Z] Checked if tokens are valid: true, expires at: 1733622095044
+[debug] [2024-12-08T00:48:38.038Z] Checked if tokens are valid: true, expires at: 1733622095044
+[debug] [2024-12-08T00:48:38.039Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/labyrinth-b3test:testIamPermissions [none]
+[debug] [2024-12-08T00:48:38.040Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/labyrinth-b3test:testIamPermissions x-goog-quota-user=projects/labyrinth-b3test
+[debug] [2024-12-08T00:48:38.040Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/labyrinth-b3test:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2024-12-08T00:48:38.848Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/labyrinth-b3test:testIamPermissions 200
+[debug] [2024-12-08T00:48:38.848Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/labyrinth-b3test:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2024-12-08T00:48:38.848Z] Checked if tokens are valid: true, expires at: 1733622095044
+[debug] [2024-12-08T00:48:38.848Z] Checked if tokens are valid: true, expires at: 1733622095044
+[debug] [2024-12-08T00:48:38.848Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/labyrinth-b3test/serviceAccounts/labyrinth-b3test@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2024-12-08T00:48:38.848Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/labyrinth-b3test/serviceAccounts/labyrinth-b3test@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2024-12-08T00:48:39.635Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/labyrinth-b3test/serviceAccounts/labyrinth-b3test@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2024-12-08T00:48:39.635Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/labyrinth-b3test/serviceAccounts/labyrinth-b3test@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'labyrinth-b3test'...
+[info] 
+[info] i  deploying functions 
+[debug] [2024-12-08T00:48:39.639Z] Checked if tokens are valid: true, expires at: 1733622095044
+[debug] [2024-12-08T00:48:39.639Z] Checked if tokens are valid: true, expires at: 1733622095044
+[debug] [2024-12-08T00:48:39.639Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/labyrinth-b3test [none]
+[debug] [2024-12-08T00:48:40.028Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/labyrinth-b3test 200
+[debug] [2024-12-08T00:48:40.028Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/labyrinth-b3test {"projectId":"labyrinth-b3test","projectNumber":"614434535258","displayName":"Labyrinth","name":"projects/labyrinth-b3test","resources":{"hostingSite":"labyrinth-b3test","realtimeDatabaseInstance":"labyrinth-b3test-default-rtdb"},"state":"ACTIVE","etag":"1_9afd0a93-c9fa-435a-87e3-566dcfbf85e7"}
+[info] i  functions: preparing codebase default for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[debug] [2024-12-08T00:48:40.029Z] Checked if tokens are valid: true, expires at: 1733622095044
+[debug] [2024-12-08T00:48:40.030Z] Checked if tokens are valid: true, expires at: 1733622095044
+[debug] [2024-12-08T00:48:40.030Z] Checked if tokens are valid: true, expires at: 1733622095044
+[debug] [2024-12-08T00:48:40.030Z] Checked if tokens are valid: true, expires at: 1733622095044
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[debug] [2024-12-08T00:48:40.030Z] Checked if tokens are valid: true, expires at: 1733622095044
+[debug] [2024-12-08T00:48:40.030Z] Checked if tokens are valid: true, expires at: 1733622095044
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2024-12-08T00:48:40.030Z] Checked if tokens are valid: true, expires at: 1733622095044
+[debug] [2024-12-08T00:48:40.031Z] Checked if tokens are valid: true, expires at: 1733622095044
+[debug] [2024-12-08T00:48:40.031Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/labyrinth-b3test/services/cloudfunctions.googleapis.com [none]
+[debug] [2024-12-08T00:48:40.031Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/labyrinth-b3test/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/labyrinth-b3test
+[debug] [2024-12-08T00:48:40.032Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/labyrinth-b3test/services/runtimeconfig.googleapis.com [none]
+[debug] [2024-12-08T00:48:40.032Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/labyrinth-b3test/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/labyrinth-b3test
+[debug] [2024-12-08T00:48:40.032Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/labyrinth-b3test/services/cloudbuild.googleapis.com [none]
+[debug] [2024-12-08T00:48:40.032Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/labyrinth-b3test/services/cloudbuild.googleapis.com x-goog-quota-user=projects/labyrinth-b3test
+[debug] [2024-12-08T00:48:40.033Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/labyrinth-b3test/services/artifactregistry.googleapis.com [none]
+[debug] [2024-12-08T00:48:40.033Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/labyrinth-b3test/services/artifactregistry.googleapis.com x-goog-quota-user=projects/labyrinth-b3test
+[debug] [2024-12-08T00:48:40.983Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/labyrinth-b3test/services/cloudfunctions.googleapis.com 200
+[debug] [2024-12-08T00:48:40.983Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/labyrinth-b3test/services/cloudfunctions.googleapis.com [omitted]
+[info] +  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2024-12-08T00:48:41.004Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/labyrinth-b3test/services/cloudbuild.googleapis.com 200
+[debug] [2024-12-08T00:48:41.005Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/labyrinth-b3test/services/cloudbuild.googleapis.com [omitted]
+[info] +  functions: required API cloudbuild.googleapis.com is enabled 
+[debug] [2024-12-08T00:48:41.008Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/labyrinth-b3test/services/runtimeconfig.googleapis.com 200
+[debug] [2024-12-08T00:48:41.008Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/labyrinth-b3test/services/runtimeconfig.googleapis.com [omitted]
+[debug] [2024-12-08T00:48:41.044Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/labyrinth-b3test/services/artifactregistry.googleapis.com 200
+[debug] [2024-12-08T00:48:41.045Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/labyrinth-b3test/services/artifactregistry.googleapis.com [omitted]
+[info] +  artifactregistry: required API artifactregistry.googleapis.com is enabled 
+[debug] [2024-12-08T00:48:41.045Z] Checked if tokens are valid: true, expires at: 1733622095044
+[debug] [2024-12-08T00:48:41.045Z] Checked if tokens are valid: true, expires at: 1733622095044
+[debug] [2024-12-08T00:48:41.045Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/labyrinth-b3test/adminSdkConfig [none]
+[debug] [2024-12-08T00:48:41.385Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/labyrinth-b3test/adminSdkConfig 200
+[debug] [2024-12-08T00:48:41.385Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/labyrinth-b3test/adminSdkConfig {"projectId":"labyrinth-b3test","databaseURL":"https://labyrinth-b3test-default-rtdb.europe-west1.firebasedatabase.app","storageBucket":"labyrinth-b3test.firebasestorage.app"}
+[debug] [2024-12-08T00:48:41.385Z] Checked if tokens are valid: true, expires at: 1733622095044
+[debug] [2024-12-08T00:48:41.385Z] Checked if tokens are valid: true, expires at: 1733622095044
+[debug] [2024-12-08T00:48:41.385Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/labyrinth-b3test/configs [none]
+[debug] [2024-12-08T00:48:41.828Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/labyrinth-b3test/configs 200
+[debug] [2024-12-08T00:48:41.828Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/labyrinth-b3test/configs {}
+[debug] [2024-12-08T00:48:41.829Z] Validating nodejs source
+[warn] !  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[debug] [2024-12-08T00:48:43.046Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log",
+    "test": "jest"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "firebase-admin": "^12.7.0",
+    "firebase-functions": "^6.1.0"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^3.3.0",
+    "jest": "^29.7.0"
+  },
+  "private": true,
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/jest.setup.js"
+    ]
+  }
+}
+[debug] [2024-12-08T00:48:43.046Z] Building nodejs source
+[info] i  functions: Loading and analyzing source code for codebase default to determine what to deploy 
+[debug] [2024-12-08T00:48:43.047Z] Could not find functions.yaml. Must use http discovery
+[debug] [2024-12-08T00:48:43.054Z] Found firebase-functions binary at 'C:\Users\icham\Documents\ESGI\labyrinth\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8401
+
+[debug] [2024-12-08T00:48:43.620Z] Got response from /__/functions.yaml {"endpoints":{"dailyApiCall":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"scheduleTrigger":{"schedule":"0 0 * * *","retryConfig":{"retryCount":null,"maxDoublings":null,"maxRetryDuration":null,"maxBackoffDuration":null,"minBackoffDuration":null},"timeZone":"Europe/Paris"},"labels":{},"entryPoint":"dailyApiCall"},"api":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"api"}},"specVersion":"v1alpha1","requiredAPIs":[{"api":"cloudscheduler.googleapis.com","reason":"Needed for scheduled functions."}],"extensions":{}}
+[info] i  extensions: ensuring required API firebaseextensions.googleapis.com is enabled... 
+[debug] [2024-12-08T00:48:43.648Z] Checked if tokens are valid: true, expires at: 1733622095044
+[debug] [2024-12-08T00:48:43.648Z] Checked if tokens are valid: true, expires at: 1733622095044
+[debug] [2024-12-08T00:48:43.649Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/labyrinth-b3test/services/firebaseextensions.googleapis.com [none]
+[debug] [2024-12-08T00:48:43.649Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/labyrinth-b3test/services/firebaseextensions.googleapis.com x-goog-quota-user=projects/labyrinth-b3test
+[debug] [2024-12-08T00:48:44.543Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/labyrinth-b3test/services/firebaseextensions.googleapis.com 200
+[debug] [2024-12-08T00:48:44.543Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/labyrinth-b3test/services/firebaseextensions.googleapis.com [omitted]
+[info] +  extensions: required API firebaseextensions.googleapis.com is enabled 
+[debug] [2024-12-08T00:48:44.543Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-12-08T00:48:44.544Z] > authorizing via signed-in user (icham.duret14@gmail.com)
+[debug] [2024-12-08T00:48:44.544Z] [iam] checking project labyrinth-b3test for permissions ["firebase.projects.get","firebaseextensions.instances.list"]
+[debug] [2024-12-08T00:48:44.544Z] Checked if tokens are valid: true, expires at: 1733622095044
+[debug] [2024-12-08T00:48:44.544Z] Checked if tokens are valid: true, expires at: 1733622095044
+[debug] [2024-12-08T00:48:44.544Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/labyrinth-b3test:testIamPermissions [none]
+[debug] [2024-12-08T00:48:44.544Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/labyrinth-b3test:testIamPermissions x-goog-quota-user=projects/labyrinth-b3test
+[debug] [2024-12-08T00:48:44.544Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/labyrinth-b3test:testIamPermissions {"permissions":["firebase.projects.get","firebaseextensions.instances.list"]}
+[debug] [2024-12-08T00:48:45.251Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/labyrinth-b3test:testIamPermissions 200
+[debug] [2024-12-08T00:48:45.251Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/labyrinth-b3test:testIamPermissions {"permissions":["firebase.projects.get","firebaseextensions.instances.list"]}
+[debug] [2024-12-08T00:48:45.251Z] Checked if tokens are valid: true, expires at: 1733622095044
+[debug] [2024-12-08T00:48:45.251Z] Checked if tokens are valid: true, expires at: 1733622095044
+[debug] [2024-12-08T00:48:45.252Z] >>> [apiv2][query] GET https://firebaseextensions.googleapis.com/v1beta/projects/labyrinth-b3test/instances pageSize=100&pageToken=
+[debug] [2024-12-08T00:48:46.166Z] <<< [apiv2][status] GET https://firebaseextensions.googleapis.com/v1beta/projects/labyrinth-b3test/instances 200
+[debug] [2024-12-08T00:48:46.166Z] <<< [apiv2][body] GET https://firebaseextensions.googleapis.com/v1beta/projects/labyrinth-b3test/instances {}
+[info] i  functions: preparing functions directory for uploading... 
+[info] i  functions: packaged C:\Users\icham\Documents\ESGI\labyrinth\functions (64.55 KB) for uploading 
+[debug] [2024-12-08T00:48:46.217Z] Checked if tokens are valid: true, expires at: 1733622095044
+[debug] [2024-12-08T00:48:46.217Z] Checked if tokens are valid: true, expires at: 1733622095044
+[debug] [2024-12-08T00:48:46.217Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/projects/labyrinth-b3test/locations/-/functions [none]
+[debug] [2024-12-08T00:48:46.921Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/projects/labyrinth-b3test/locations/-/functions 200
+[debug] [2024-12-08T00:48:46.921Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/projects/labyrinth-b3test/locations/-/functions {"functions":[{"name":"projects/labyrinth-b3test/locations/us-central1/functions/dailyApiCall","eventTrigger":{"eventType":"google.pubsub.topic.publish","resource":"projects/labyrinth-b3test/topics/firebase-schedule-dailyApiCall-us-central1","service":"pubsub.googleapis.com","failurePolicy":{}},"status":"ACTIVE","entryPoint":"dailyApiCall","timeout":"60s","availableMemoryMb":256,"serviceAccountEmail":"labyrinth-b3test@appspot.gserviceaccount.com","updateTime":"2024-11-20T08:11:55.138Z","versionId":"8","labels":{"deployment-tool":"cli-firebase","deployment-scheduled":"true","firebase-functions-hash":"9549be70e27090d424102539440457ce28f3754d"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-126703501224.us-central1.cloudfunctions.appspot.com/0e149df9-406c-4a49-9818-a96769d9260f.zip","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"labyrinth-b3test\",\"databaseURL\":\"https://labyrinth-b3test-default-rtdb.europe-west1.firebasedatabase.app\",\"storageBucket\":\"labyrinth-b3test.firebasestorage.app\"}","GCLOUD_PROJECT":"labyrinth-b3test","EVENTARC_CLOUD_EVENT_SOURCE":"projects/labyrinth-b3test/locations/us-central1/functions/dailyApiCall"},"runtime":"nodejs18","maxInstances":3000,"ingressSettings":"ALLOW_ALL","buildId":"fe5c68b0-a618-4c25-a08c-cb563009a9b6","buildEnvironmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""},"buildName":"projects/614434535258/locations/us-central1/builds/fe5c68b0-a618-4c25-a08c-cb563009a9b6","dockerRegistry":"ARTIFACT_REGISTRY","automaticUpdatePolicy":{},"buildServiceAccount":"projects/labyrinth-b3test/serviceAccounts/614434535258-compute@developer.gserviceaccount.com"}]}
+[debug] [2024-12-08T00:48:46.921Z] Checked if tokens are valid: true, expires at: 1733622095044
+[debug] [2024-12-08T00:48:46.921Z] Checked if tokens are valid: true, expires at: 1733622095044
+[debug] [2024-12-08T00:48:46.922Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2/projects/labyrinth-b3test/locations/-/functions filter=environment%3D%22GEN_2%22
+[debug] [2024-12-08T00:48:48.009Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v2/projects/labyrinth-b3test/locations/-/functions 200
+[debug] [2024-12-08T00:48:48.009Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v2/projects/labyrinth-b3test/locations/-/functions {}
+[info] i  functions: ensuring required API cloudscheduler.googleapis.com is enabled... 
+[debug] [2024-12-08T00:48:48.011Z] Checked if tokens are valid: true, expires at: 1733622095044
+[debug] [2024-12-08T00:48:48.011Z] Checked if tokens are valid: true, expires at: 1733622095044
+[debug] [2024-12-08T00:48:48.012Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/labyrinth-b3test/services/cloudscheduler.googleapis.com [none]
+[debug] [2024-12-08T00:48:48.012Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/labyrinth-b3test/services/cloudscheduler.googleapis.com x-goog-quota-user=projects/labyrinth-b3test
