@@ -1,0 +1,19 @@
+.Footer {
+  border-top: 1px solid black;
+  position: relative;
+  width: 100%;
+  bottom: 0;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.Footer p {
+  margin: 2px;
+}
+.Footer p a {
+  font-weight: bold;
+  text-decoration: none;
+  color: #00008B;
+}/*# sourceMappingURL=Footer.css.map */

@@ -1,0 +1,11 @@
+.Rules {
+  height: 40%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.Rules p {
+  width: 50%;
+  height: 10px;
+  font-size: large;
+}/*# sourceMappingURL=Rules.css.map */

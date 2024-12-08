@@ -1,0 +1,62 @@
+.Leaderboard{
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .leaderboardWindow{
+        border: 2px solid black;
+        width: 60%;
+        height: 90%;
+        background-color: aliceblue;
+
+        .title{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 10%;
+            font-size: 1.5em;
+            border-bottom: 2px solid black;
+        }
+
+        .rows{
+            display: flex;
+            //border-bottom: 1px solid black;
+            overflow-y: scroll;
+            height: 80%;
+
+            [class^="row"]{
+                text-align: center;
+                width: 100%;
+                p:first-child{
+                    border-bottom: 1px solid black;
+                    font-weight: bold;
+                }
+                p{
+                    padding-bottom: 12px;
+                }
+            }
+        }
+
+        .date{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid black;
+            height: 10%;
+
+            p{
+                padding: 0;
+                margin: 0;
+            }
+
+            button{
+                padding: 5px;
+                width: 60px;
+                height: 30px;
+                border-radius: 10px;
+                border: 1px solid black;
+            }
+        }
+    }
+}

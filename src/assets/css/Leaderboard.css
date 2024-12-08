@@ -1,0 +1,54 @@
+.Leaderboard {
+  height: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Leaderboard .leaderboardWindow {
+  border: 2px solid black;
+  width: 60%;
+  height: 90%;
+  background-color: aliceblue;
+}
+.Leaderboard .leaderboardWindow .title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10%;
+  font-size: 1.5em;
+  border-bottom: 2px solid black;
+}
+.Leaderboard .leaderboardWindow .rows {
+  display: flex;
+  overflow-y: scroll;
+  height: 80%;
+}
+.Leaderboard .leaderboardWindow .rows [class^=row] {
+  text-align: center;
+  width: 100%;
+}
+.Leaderboard .leaderboardWindow .rows [class^=row] p:first-child {
+  border-bottom: 1px solid black;
+  font-weight: bold;
+}
+.Leaderboard .leaderboardWindow .rows [class^=row] p {
+  padding-bottom: 12px;
+}
+.Leaderboard .leaderboardWindow .date {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid black;
+  height: 10%;
+}
+.Leaderboard .leaderboardWindow .date p {
+  padding: 0;
+  margin: 0;
+}
+.Leaderboard .leaderboardWindow .date button {
+  padding: 5px;
+  width: 60px;
+  height: 30px;
+  border-radius: 10px;
+  border: 1px solid black;
+}/*# sourceMappingURL=Leaderboard.css.map */
