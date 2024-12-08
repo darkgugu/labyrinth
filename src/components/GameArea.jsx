@@ -5,6 +5,8 @@ import database from '../firebaseConfig'
 import { ref, get } from 'firebase/database'
 import { Case } from './Case'
 
+//TEST
+
 export const GameArea = () => {
 	const [walls, setWalls] = useState(null)
 	const [playerPosition, setPlayerPosition] = useState([0, 0])
