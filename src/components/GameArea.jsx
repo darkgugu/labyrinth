@@ -29,6 +29,61 @@ export const GameArea = () => {
 		fetchWalls()
 	}, [])
 
+	useEffect(() => {
+		const handleKeyDown = (e) => {
+			switch (e.key) {
+				case 'ArrowUp':
+				case 'z':
+					if (outOfBoundsMove('up', playerPosition)) {
+						break
+					}
+					setPlayerPosition([
+						playerPosition[0] - 1,
+						playerPosition[1],
+					])
+					break
+				case 'ArrowLeft':
+				case 'q':
+					if (outOfBoundsMove('left', playerPosition)) {
+						break
+					}
+					setPlayerPosition([
+						playerPosition[0],
+						playerPosition[1] - 1,
+					])
+					break
+				case 'ArrowDown':
+				case 's':
+					if (outOfBoundsMove('down', playerPosition)) {
+						break
+					}
+					setPlayerPosition([
+						playerPosition[0] + 1,
+						playerPosition[1],
+					])
+					break
+				case 'ArrowRight':
+				case 'd':
+					if (outOfBoundsMove('right', playerPosition)) {
+						break
+					}
+					setPlayerPosition([
+						playerPosition[0],
+						playerPosition[1] + 1,
+					])
+					break
+				default:
+					break
+			}
+		}
+		document.addEventListener('keydown', handleKeyDown)
+
+		// Don't forget to clean up
+		return function cleanup() {
+			document.removeEventListener('keydown', handleKeyDown)
+		}
+	})
+
 	if (!walls) return <div></div>
 
 	const checkForWalls = (matrice, position) => {
@@ -62,41 +117,6 @@ export const GameArea = () => {
 		}
 	}
 
-	const handleKeyDown = (e) => {
-		switch (e.key) {
-			case 'ArrowUp':
-			case 'z':
-				if (outOfBoundsMove('up', playerPosition)) {
-					break
-				}
-				setPlayerPosition([playerPosition[0] - 1, playerPosition[1]])
-				break
-			case 'ArrowLeft':
-			case 'q':
-				if (outOfBoundsMove('left', playerPosition)) {
-					break
-				}
-				setPlayerPosition([playerPosition[0], playerPosition[1] - 1])
-				break
-			case 'ArrowDown':
-			case 's':
-				if (outOfBoundsMove('down', playerPosition)) {
-					break
-				}
-				setPlayerPosition([playerPosition[0] + 1, playerPosition[1]])
-				break
-			case 'ArrowRight':
-			case 'd':
-				if (outOfBoundsMove('right', playerPosition)) {
-					break
-				}
-				setPlayerPosition([playerPosition[0], playerPosition[1] + 1])
-				break
-			default:
-				break
-		}
-	}
-
 	const outOfBoundsMove = (direction, position) => {
 		if (position[0] === 0 && direction === 'up') {
 			return true
@@ -111,9 +131,7 @@ export const GameArea = () => {
 
 	return (
 		<div className="GameArea">
-			<div className="gameWindow" onKeyDown={handleKeyDown} tabIndex={0}>
-				{caseArray}
-			</div>
+			<div className="gameWindow">{caseArray}</div>
 		</div>
 	)
 }
