@@ -1,6 +1,10 @@
 .ButtonArrow{
     height: 70px;
     width: 70px;
+    @media (min-width: 1200px) {
+        width: 35px;
+        height: 35px;
+    }
     border: 2px solid black;
     margin: 2px;
     display: flex;

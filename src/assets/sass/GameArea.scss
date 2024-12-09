@@ -9,6 +9,10 @@
         border: 2px solid black;
         width: 600px;
         height: 600px;
+        @media (min-width: 1200px) {
+            width: 510px;
+            height: 510px;
+        }
         background-color: aliceblue;
         display: flex;
         flex-wrap: wrap;
