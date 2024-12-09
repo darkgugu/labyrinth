@@ -37,6 +37,9 @@ export const GameArea = () => {
 					if (outOfBoundsMove('up', playerPosition)) {
 						break
 					}
+					if (isWall(walls.horizontal, 'up', playerPosition)) {
+						break
+					}
 					setPlayerPosition([
 						playerPosition[0] - 1,
 						playerPosition[1],
@@ -45,6 +48,9 @@ export const GameArea = () => {
 				case 'ArrowLeft':
 				case 'q':
 					if (outOfBoundsMove('left', playerPosition)) {
+						break
+					}
+					if (isWall(walls.vertical, 'left', playerPosition)) {
 						break
 					}
 					setPlayerPosition([
@@ -57,6 +63,12 @@ export const GameArea = () => {
 					if (outOfBoundsMove('down', playerPosition)) {
 						break
 					}
+					if (isWall(walls.horizontal, 'down', playerPosition)) {
+						console.log('Wall !')
+						break
+					} else {
+						console.log('No wall')
+					}
 					setPlayerPosition([
 						playerPosition[0] + 1,
 						playerPosition[1],
@@ -66,6 +78,12 @@ export const GameArea = () => {
 				case 'd':
 					if (outOfBoundsMove('right', playerPosition)) {
 						break
+					}
+					if (isWall(walls.vertical, 'right', playerPosition)) {
+						console.log('Wall !')
+						break
+					} else {
+						console.log('No wall')
 					}
 					setPlayerPosition([
 						playerPosition[0],
@@ -127,6 +145,22 @@ export const GameArea = () => {
 		} else if (position[1] === 14 && direction === 'right') {
 			return true
 		}
+	}
+
+	const isWall = (matrice, direction, position) => {
+		switch (direction) {
+			case 'right':
+				return matrice[position[0]][position[1] + 1] === 1
+			case 'left':
+				return matrice[position[0]][position[1]] === 1
+			case 'up':
+				return matrice[position[0]][position[1]] === 1
+			case 'down':
+				return matrice[position[0] + 1][position[1]] === 1
+			default:
+				break
+		}
+		return true
 	}
 
 	return (
