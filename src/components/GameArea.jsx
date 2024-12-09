@@ -8,6 +8,7 @@ import { Case } from './Case'
 export const GameArea = () => {
 	const [walls, setWalls] = useState(null)
 	const [playerPosition, setPlayerPosition] = useState([0, 0])
+	const [isWon, setIsWon] = useState(false)
 
 	useEffect(() => {
 		// Fetch walls data from Realtime Database
@@ -16,7 +17,6 @@ export const GameArea = () => {
 				const snapshot = await get(ref(database, 'walls'))
 				if (snapshot.exists()) {
 					setWalls(snapshot.val())
-					console.log('walls:', snapshot.val())
 				} else {
 					setWalls({ message: 'No data available' })
 				}
@@ -64,10 +64,7 @@ export const GameArea = () => {
 						break
 					}
 					if (isWall(walls.horizontal, 'down', playerPosition)) {
-						console.log('Wall !')
 						break
-					} else {
-						console.log('No wall')
 					}
 					setPlayerPosition([
 						playerPosition[0] + 1,
@@ -80,10 +77,7 @@ export const GameArea = () => {
 						break
 					}
 					if (isWall(walls.vertical, 'right', playerPosition)) {
-						console.log('Wall !')
 						break
-					} else {
-						console.log('No wall')
 					}
 					setPlayerPosition([
 						playerPosition[0],
@@ -130,6 +124,9 @@ export const GameArea = () => {
 					isPlayerHere={
 						playerPosition[0] === i && playerPosition[1] === j
 					}
+					winningCase={i === 14 && j === 14 ? true : false}
+					isWon={isWon}
+					onWin={() => setIsWon(true)}
 				/>
 			)
 		}
@@ -165,7 +162,9 @@ export const GameArea = () => {
 
 	return (
 		<div className="GameArea">
-			<div className="gameWindow">{caseArray}</div>
+			<div className="gameWindow">
+				{!isWon ? caseArray : <p>Bravo !</p>}
+			</div>
 		</div>
 	)
 }

@@ -17,4 +17,10 @@
   background-color: red;
   height: 15px;
   width: 15px;
+}
+.Case #winningCase {
+  background-color: green;
+  height: 15px;
+  width: 15px;
+  border-radius: 10px;
 }/*# sourceMappingURL=Case.css.map */

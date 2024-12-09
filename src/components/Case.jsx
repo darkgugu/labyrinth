@@ -1,8 +1,19 @@
+import { useEffect } from 'react'
 import '../assets/css/Case.css'
 
-export const Case = ({ borderLeft, borderTop, isPlayerHere }) => {
-	//const borderLeft = '1px solid black'
-	//const borderTop = '1px solid black'
+export const Case = ({
+	borderLeft,
+	borderTop,
+	isPlayerHere,
+	winningCase,
+	isWon,
+	onWin,
+}) => {
+	useEffect(() => {
+		if (isPlayerHere && winningCase) {
+			onWin()
+		}
+	}, [isPlayerHere, winningCase, onWin])
 
 	return (
 		<div
@@ -10,6 +21,7 @@ export const Case = ({ borderLeft, borderTop, isPlayerHere }) => {
 			style={{ borderLeft: `${borderLeft}`, borderTop: `${borderTop}` }}
 		>
 			{isPlayerHere ? <div id="player"></div> : null}
+			{winningCase ? <div id="winningCase"></div> : null}
 		</div>
 	)
 }
