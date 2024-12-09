@@ -2,10 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import reportWebVitals from './reportWebVitals'
-import { Footer } from './components/Footer'
-import { GameArea } from './components/GameArea'
-import { Header } from './components/Header'
-import { Body } from './components/Body'
 import App from './components/App'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
