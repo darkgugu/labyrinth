@@ -6,7 +6,7 @@
   align-items: center;
 }
 .GameArea .gameWindow {
-  border: 2px solid black;
+  border: 1px solid black;
   width: 600px;
   height: 600px;
   background-color: aliceblue;
