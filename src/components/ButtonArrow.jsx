@@ -6,6 +6,50 @@ import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
 export const ButtonArrow = ({ direction }) => {
+	const dispatchGlobalKeyDown = () => {
+		let key
+		switch (direction) {
+			case 'up':
+				key = 'ArrowUp'
+				break
+			case 'left':
+				key = 'ArrowLeft'
+				break
+			case 'down':
+				key = 'ArrowDown'
+				break
+			case 'right':
+				key = 'ArrowRight'
+				break
+			default:
+				key = 'ArrowRight'
+		}
+
+		const event = new KeyboardEvent('keydown', {
+			key: key,
+			code: key,
+			keyCode:
+				key === 'ArrowUp'
+					? 38
+					: key === 'ArrowLeft'
+					? 37
+					: key === 'ArrowDown'
+					? 40
+					: 39,
+			charCode:
+				key === 'ArrowUp'
+					? 38
+					: key === 'ArrowLeft'
+					? 37
+					: key === 'ArrowDown'
+					? 40
+					: 39,
+			bubbles: true,
+			cancelable: true,
+		})
+		document.dispatchEvent(event) // Dispatch globally
+	}
+
 	let icon
 	switch (direction) {
 		case 'up':
@@ -24,5 +68,9 @@ export const ButtonArrow = ({ direction }) => {
 			icon = null
 	}
 
-	return <div className="ButtonArrow">{icon}</div>
+	return (
+		<div className="ButtonArrow" onClick={dispatchGlobalKeyDown}>
+			{icon}
+		</div>
+	)
 }
