@@ -6,8 +6,9 @@ export const Case = ({
 	borderTop,
 	isPlayerHere,
 	winningCase,
-	isWon,
 	onWin,
+	borderRight,
+	borderBottom,
 }) => {
 	useEffect(() => {
 		if (isPlayerHere && winningCase) {
@@ -18,7 +19,12 @@ export const Case = ({
 	return (
 		<div
 			className="Case"
-			style={{ borderLeft: `${borderLeft}`, borderTop: `${borderTop}` }}
+			style={{
+				borderLeft: `${borderLeft}`,
+				borderTop: `${borderTop}`,
+				borderRight: `${borderRight}`,
+				borderBottom: `${borderBottom}`,
+			}}
 		>
 			{isPlayerHere ? <div id="player"></div> : null}
 			{winningCase ? <div id="winningCase"></div> : null}

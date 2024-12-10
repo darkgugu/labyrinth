@@ -10,6 +10,8 @@ export const GameArea = () => {
 	const [playerPosition, setPlayerPosition] = useState([0, 0])
 	const [isWon, setIsWon] = useState(false)
 
+	const labSize = 15
+
 	useEffect(() => {
 		// Fetch walls data from Realtime Database
 		const fetchWalls = async () => {
@@ -106,8 +108,8 @@ export const GameArea = () => {
 
 	let caseArray = []
 
-	for (let i = 0; i < 15; i++) {
-		for (let j = 0; j < 15; j++) {
+	for (let i = 0; i < labSize; i++) {
+		for (let j = 0; j < labSize; j++) {
 			caseArray.push(
 				<Case
 					key={`${i},${j}`}
@@ -124,9 +126,14 @@ export const GameArea = () => {
 					isPlayerHere={
 						playerPosition[0] === i && playerPosition[1] === j
 					}
-					winningCase={i === 14 && j === 14 ? true : false}
-					isWon={isWon}
+					winningCase={
+						i === labSize - 1 && j === labSize - 1 ? true : false
+					}
 					onWin={() => setIsWon(true)}
+					borderRight={j === labSize - 1 ? '1px solid black' : null}
+					borderBottom={i === labSize - 1 ? '1px solid black' : null}
+					//j === L - 1 ? cell.style.borderRight = '1px solid black' : null;
+					//i === H - 1 ? cell.style.borderBottom = '1px solid black' : null;
 				/>
 			)
 		}
