@@ -10,16 +10,9 @@ export const Case = ({
 	borderRight,
 	borderBottom,
 }) => {
-	const [isVisited, setIsVisited] = useState()
 	useEffect(() => {
 		if (isPlayerHere && winningCase) {
 			onWin()
-		}
-		if (isPlayerHere) {
-			setIsVisited(true)
-		}
-		if (winningCase) {
-			setIsVisited(true)
 		}
 	}, [isPlayerHere, winningCase, onWin])
 
