@@ -7,8 +7,20 @@
   justify-content: center;
   align-items: center;
 }
+@media (min-width: 1200px) {
+  .Case {
+    width: 32.4px;
+    height: 32px;
+  }
+}
 .Case #player {
   background-color: red;
   height: 15px;
   width: 15px;
+}
+.Case #winningCase {
+  background-color: green;
+  height: 15px;
+  width: 15px;
+  border-radius: 10px;
 }/*# sourceMappingURL=Case.css.map */

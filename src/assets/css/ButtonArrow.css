@@ -6,4 +6,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+@media (min-width: 1200px) {
+  .ButtonArrow {
+    width: 35px;
+    height: 35px;
+  }
 }/*# sourceMappingURL=ButtonArrow.css.map */
