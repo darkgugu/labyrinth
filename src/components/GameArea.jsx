@@ -9,8 +9,9 @@ export const GameArea = () => {
 	const [walls, setWalls] = useState(null)
 	const [playerPosition, setPlayerPosition] = useState([0, 0])
 	const [isWon, setIsWon] = useState(false)
+	const [steps, setSteps] = useState(0)
 
-	const labSize = 15
+	const labSize = 30
 
 	useEffect(() => {
 		// Fetch walls data from Realtime Database
@@ -46,6 +47,7 @@ export const GameArea = () => {
 						playerPosition[0] - 1,
 						playerPosition[1],
 					])
+					setSteps(steps + 1)
 					break
 				case 'ArrowLeft':
 				case 'q':
@@ -59,6 +61,7 @@ export const GameArea = () => {
 						playerPosition[0],
 						playerPosition[1] - 1,
 					])
+					setSteps(steps + 1)
 					break
 				case 'ArrowDown':
 				case 's':
@@ -72,6 +75,7 @@ export const GameArea = () => {
 						playerPosition[0] + 1,
 						playerPosition[1],
 					])
+					setSteps(steps + 1)
 					break
 				case 'ArrowRight':
 				case 'd':
@@ -85,6 +89,7 @@ export const GameArea = () => {
 						playerPosition[0],
 						playerPosition[1] + 1,
 					])
+					setSteps(steps + 1)
 					break
 				default:
 					break
@@ -140,11 +145,11 @@ export const GameArea = () => {
 	const outOfBoundsMove = (direction, position) => {
 		if (position[0] === 0 && direction === 'up') {
 			return true
-		} else if (position[0] === 14 && direction === 'down') {
+		} else if (position[0] === labSize - 1 && direction === 'down') {
 			return true
 		} else if (position[1] === 0 && direction === 'left') {
 			return true
-		} else if (position[1] === 14 && direction === 'right') {
+		} else if (position[1] === labSize - 1 && direction === 'right') {
 			return true
 		}
 	}
@@ -165,11 +170,16 @@ export const GameArea = () => {
 		return true
 	}
 
+	if (isWon) {
+		console.log('You won in', steps, 'steps')
+	}
+
 	return (
 		<div className="GameArea">
 			<div className="gameWindow">
 				{!isWon ? caseArray : <p>Bravo !</p>}
 			</div>
+			{/* <Mask /> */}
 		</div>
 	)
 }
