@@ -10,6 +10,9 @@ import { Case } from './Case'
 export const GameArea = () => {
 	const [walls, setWalls] = useState(null)
 	const [playerPosition, setPlayerPosition] = useState([0, 0])
+	const [isWon, setIsWon] = useState(false)
+
+	const labSize = 15
 
 	useEffect(() => {
 		// Fetch walls data from Realtime Database
@@ -18,7 +21,6 @@ export const GameArea = () => {
 				const snapshot = await get(ref(database, 'walls'))
 				if (snapshot.exists()) {
 					setWalls(snapshot.val())
-					console.log('walls:', snapshot.val())
 				} else {
 					setWalls({ message: 'No data available' })
 				}
@@ -31,6 +33,73 @@ export const GameArea = () => {
 		fetchWalls()
 	}, [])
 
+	useEffect(() => {
+		const handleKeyDown = (e) => {
+			switch (e.key) {
+				case 'ArrowUp':
+				case 'z':
+					if (outOfBoundsMove('up', playerPosition)) {
+						break
+					}
+					if (isWall(walls.horizontal, 'up', playerPosition)) {
+						break
+					}
+					setPlayerPosition([
+						playerPosition[0] - 1,
+						playerPosition[1],
+					])
+					break
+				case 'ArrowLeft':
+				case 'q':
+					if (outOfBoundsMove('left', playerPosition)) {
+						break
+					}
+					if (isWall(walls.vertical, 'left', playerPosition)) {
+						break
+					}
+					setPlayerPosition([
+						playerPosition[0],
+						playerPosition[1] - 1,
+					])
+					break
+				case 'ArrowDown':
+				case 's':
+					if (outOfBoundsMove('down', playerPosition)) {
+						break
+					}
+					if (isWall(walls.horizontal, 'down', playerPosition)) {
+						break
+					}
+					setPlayerPosition([
+						playerPosition[0] + 1,
+						playerPosition[1],
+					])
+					break
+				case 'ArrowRight':
+				case 'd':
+					if (outOfBoundsMove('right', playerPosition)) {
+						break
+					}
+					if (isWall(walls.vertical, 'right', playerPosition)) {
+						break
+					}
+					setPlayerPosition([
+						playerPosition[0],
+						playerPosition[1] + 1,
+					])
+					break
+				default:
+					break
+			}
+		}
+		document.addEventListener('keydown', handleKeyDown)
+
+		// Don't forget to clean up
+		return function cleanup() {
+			document.removeEventListener('keydown', handleKeyDown)
+		}
+	})
+
 	if (!walls) return <div></div>
 
 	const checkForWalls = (matrice, position) => {
@@ -41,8 +110,8 @@ export const GameArea = () => {
 
 	let caseArray = []
 
-	for (let i = 0; i < 15; i++) {
-		for (let j = 0; j < 15; j++) {
+	for (let i = 0; i < labSize; i++) {
+		for (let j = 0; j < labSize; j++) {
 			caseArray.push(
 				<Case
 					key={`${i},${j}`}
@@ -59,43 +128,14 @@ export const GameArea = () => {
 					isPlayerHere={
 						playerPosition[0] === i && playerPosition[1] === j
 					}
+					winningCase={
+						i === labSize - 1 && j === labSize - 1 ? true : false
+					}
+					onWin={() => setIsWon(true)}
+					borderRight={j === labSize - 1 ? '1px solid black' : null}
+					borderBottom={i === labSize - 1 ? '1px solid black' : null}
 				/>
 			)
-		}
-	}
-
-	const handleKeyDown = (e) => {
-		switch (e.key) {
-			case 'ArrowUp':
-			case 'z':
-				if (outOfBoundsMove('up', playerPosition)) {
-					break
-				}
-				setPlayerPosition([playerPosition[0] - 1, playerPosition[1]])
-				break
-			case 'ArrowLeft':
-			case 'q':
-				if (outOfBoundsMove('left', playerPosition)) {
-					break
-				}
-				setPlayerPosition([playerPosition[0], playerPosition[1] - 1])
-				break
-			case 'ArrowDown':
-			case 's':
-				if (outOfBoundsMove('down', playerPosition)) {
-					break
-				}
-				setPlayerPosition([playerPosition[0] + 1, playerPosition[1]])
-				break
-			case 'ArrowRight':
-			case 'd':
-				if (outOfBoundsMove('right', playerPosition)) {
-					break
-				}
-				setPlayerPosition([playerPosition[0], playerPosition[1] + 1])
-				break
-			default:
-				break
 		}
 	}
 
@@ -111,10 +151,26 @@ export const GameArea = () => {
 		}
 	}
 
+	const isWall = (matrice, direction, position) => {
+		switch (direction) {
+			case 'right':
+				return matrice[position[0]][position[1] + 1] === 1
+			case 'left':
+				return matrice[position[0]][position[1]] === 1
+			case 'up':
+				return matrice[position[0]][position[1]] === 1
+			case 'down':
+				return matrice[position[0] + 1][position[1]] === 1
+			default:
+				break
+		}
+		return true
+	}
+
 	return (
 		<div className="GameArea">
-			<div className="gameWindow" onKeyDown={handleKeyDown} tabIndex={0}>
-				{caseArray}
+			<div className="gameWindow">
+				{!isWon ? caseArray : <p>Bravo !</p>}
 			</div>
 		</div>
 	)
