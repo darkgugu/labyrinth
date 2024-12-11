@@ -1,6 +1,6 @@
 const axios = require('axios')
 
-const labyrinthSize = 15
+const labyrinthSize = 30
 
 async function callApi() {
 	const response = await axios.get(
