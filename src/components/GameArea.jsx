@@ -132,8 +132,6 @@ export const GameArea = () => {
 					onWin={() => setIsWon(true)}
 					borderRight={j === labSize - 1 ? '1px solid black' : null}
 					borderBottom={i === labSize - 1 ? '1px solid black' : null}
-					//j === L - 1 ? cell.style.borderRight = '1px solid black' : null;
-					//i === H - 1 ? cell.style.borderBottom = '1px solid black' : null;
 				/>
 			)
 		}
