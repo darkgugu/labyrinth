@@ -1,3 +1,4 @@
+import React from 'react'
 import '../assets/css/ButtonArrow.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
@@ -53,23 +54,51 @@ export const ButtonArrow = ({ direction }) => {
 	let icon
 	switch (direction) {
 		case 'up':
-			icon = <FontAwesomeIcon icon={faArrowUp} size="2x" />
+			icon = (
+				<FontAwesomeIcon
+					data-testid="icon"
+					icon={faArrowUp}
+					size="2x"
+				/>
+			)
 			break
 		case 'left':
-			icon = <FontAwesomeIcon icon={faArrowLeft} size="2x" />
+			icon = (
+				<FontAwesomeIcon
+					data-testid="icon"
+					icon={faArrowLeft}
+					size="2x"
+				/>
+			)
 			break
 		case 'down':
-			icon = <FontAwesomeIcon icon={faArrowDown} size="2x" />
+			icon = (
+				<FontAwesomeIcon
+					data-testid="icon"
+					icon={faArrowDown}
+					size="2x"
+				/>
+			)
 			break
 		case 'right':
-			icon = <FontAwesomeIcon icon={faArrowRight} size="2x" />
+			icon = (
+				<FontAwesomeIcon
+					data-testid="icon"
+					icon={faArrowRight}
+					size="2x"
+				/>
+			)
 			break
 		default:
 			icon = null
 	}
 
 	return (
-		<div className="ButtonArrow" onClick={dispatchGlobalKeyDown}>
+		<div
+			className="ButtonArrow"
+			data-testid="buttonarrow"
+			onClick={dispatchGlobalKeyDown}
+		>
 			{icon}
 		</div>
 	)
