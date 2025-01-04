@@ -6,10 +6,11 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { getFirestore, doc, setDoc } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
 import { onAuthStateChanged } from 'firebase/auth';
+import { getDatabase, ref, get, set,child } from "firebase/database"; 
 
 
 const firestore = getFirestore();
-
+const database = getDatabase();
 
 const ModalLog = ({ isOpen, onClose, onSwitch, loginUser }) => {
   const [email, setEmail] = useState('');
@@ -17,15 +18,15 @@ const ModalLog = ({ isOpen, onClose, onSwitch, loginUser }) => {
   const [user, setUser] = useState(null);
 
   const isEmailValid = email.includes('@') && /[a-zA-Z]/.test(email);
-  const isFormValid = isEmailValid && password; // Validation du formulaire
+  const isFormValid = isEmailValid && password; 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      setUser(user.email); // Sauvegarde l'email ou d'autres informations dans le state
-      onClose(); // Ferme la modale
+      setUser(user.email); 
+      onClose(); 
     } catch (error) {
       console.error('Erreur lors de la connexion:', error.message);
       alert('Connexion échouée : ' + error.message);
@@ -86,10 +87,35 @@ const ModalSign = ({ isOpen, onClose, onSwitch}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
     try {
+      // Vérifier si le username est déjà pris
+      const dbRef = ref(database);
+      const snapshot = await get(child(dbRef, 'users/'));
+  
+      let isUsernameTaken = false;
+      snapshot.forEach((childSnapshot) => {
+        const userData = childSnapshot.val();
+        if (userData.username === username) {
+          isUsernameTaken = true;
+        }
+      });
+  
+      if (isUsernameTaken) {
+        alert("Ce nom d'utilisateur est déjà pris. Veuillez en choisir un autre.");
+        return;
+      }
+  
+      // Créer un utilisateur avec l'authentification Firebase
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
   
+      // Ajouter les informations de l'utilisateur (y compris le username) dans Realtime Database
+      await set(ref(database, 'users/' + user.uid), {
+        username: username,  
+        email: email,        
+        createdAt: new Date().toISOString(), 
+      });
   
       alert('Inscription réussie !');
       setEmail('');
@@ -100,9 +126,10 @@ const ModalSign = ({ isOpen, onClose, onSwitch}) => {
       console.error("Erreur lors de l'inscription:", error.message);
       alert("Inscription échouée : " + error.message);
     } finally {
-      onClose(); // Cette ligne permet de fermer la modal que l'inscription réussisse ou échoue
+      onClose(); 
     }
   };
+  
   
 
   
@@ -189,7 +216,7 @@ export const Header = () => {
   const logoutUser = async () => {
     try {
       await signOut(auth);
-      setUser(null); // Supprime l'utilisateur du state
+      setUser(null); 
     } catch (error) {
       console.error('Erreur lors de la déconnexion:', error.message);
     }
@@ -197,17 +224,22 @@ export const Header = () => {
   
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        setUser(user.email); // Si un utilisateur est connecté, mets à jour le state
+        const userRef = ref(database, 'users/' + user.uid);
+        const snapshot = await get(userRef);
+        const userData = snapshot.val();
+        
+        if (userData) {
+          setUser(userData.username); 
+        }
       } else {
-        setUser(null); // Si déconnecté, réinitialise
+        setUser(null); 
       }
     });
   
-    return () => unsubscribe(); // Nettoie l'écouteur lorsque le composant est démonté
+    return () => unsubscribe(); 
   }, []);
-  
 
   return (
     <div className="Header">
