@@ -1,5 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../assets/css/Header.css';
+import { auth } from '../firebaseConfig';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { getFirestore, doc, setDoc } from 'firebase/firestore';
+import { signOut } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
+
+
+const firestore = getFirestore();
 
 
 const ModalLog = ({ isOpen, onClose, onSwitch, loginUser }) => {
@@ -10,11 +19,19 @@ const ModalLog = ({ isOpen, onClose, onSwitch, loginUser }) => {
   const isEmailValid = email.includes('@') && /[a-zA-Z]/.test(email);
   const isFormValid = isEmailValid && password; // Validation du formulaire
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    loginUser(email); // Connexion avec l'email de l'utilisateur
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      setUser(user.email); // Sauvegarde l'email ou d'autres informations dans le state
+      onClose(); // Ferme la modale
+    } catch (error) {
+      console.error('Erreur lors de la connexion:', error.message);
+      alert('Connexion échouée : ' + error.message);
+    }
   };
-
+  
   if (!isOpen) return null;
 
 
@@ -61,15 +78,35 @@ const ModalSign = ({ isOpen, onClose, onSwitch}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [username, setUsername] = useState('');
   const [error, setError] = useState(''); 
 
   const isEmailValid = email.includes('@') && /[a-zA-Z]/.test(email);
   const isFormValid = isEmailValid && password && confirmPassword && password === confirmPassword;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+  
+  
+      alert('Inscription réussie !');
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
+      setUsername('');
+    } catch (error) {
+      console.error("Erreur lors de l'inscription:", error.message);
+      alert("Inscription échouée : " + error.message);
+    } finally {
+      onClose(); // Cette ligne permet de fermer la modal que l'inscription réussisse ou échoue
+    }
   };
+  
+
+  
+  
 
   if (!isOpen) return null;
   return (
@@ -84,6 +121,13 @@ const ModalSign = ({ isOpen, onClose, onSwitch}) => {
             placeholder="Entrez votre email" 
             value={email}
             onChange={(e)=> setEmail(e.target.value)}
+          />
+          <label>Nom d'utilisateur:</label>
+          <input 
+            type="text"
+            placeholder="Entrez votre nom d'utilisateur" 
+            value={username}
+            onChange={(e)=> setUsername(e.target.value)}
           />
           <label>Mot de passe:</label>
           <input 
@@ -134,7 +178,6 @@ export const Header = () => {
   const openModalLog = () => setIsModalLogOpen(true);
   const openModalSign = () => setIsModalSignOpen(true);
 
-  // Fonction pour fermer la modal
   const closeModalLog = () => setIsModalLogOpen(false);
   const closeModalSign = () => setIsModalSignOpen(false);
 
@@ -143,11 +186,28 @@ export const Header = () => {
     setIsModalLogOpen(false); 
   };
 
-  const logoutUser = () => {
-    setUser(null); 
+  const logoutUser = async () => {
+    try {
+      await signOut(auth);
+      setUser(null); // Supprime l'utilisateur du state
+    } catch (error) {
+      console.error('Erreur lors de la déconnexion:', error.message);
+    }
   };
+  
 
-
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user.email); // Si un utilisateur est connecté, mets à jour le state
+      } else {
+        setUser(null); // Si déconnecté, réinitialise
+      }
+    });
+  
+    return () => unsubscribe(); // Nettoie l'écouteur lorsque le composant est démonté
+  }, []);
+  
 
   return (
     <div className="Header">
@@ -164,9 +224,9 @@ export const Header = () => {
           <button className="logbutton" onClick={openModalSign}>Inscription</button>
         </span>
       )}
-      {/* Modal */}
+  
       <ModalLog isOpen={isModalLogOpen} onClose={() => setIsModalLogOpen(false)} onSwitch={switchToSignUp} loginUser={loginUser} />
-      <ModalSign isOpen={isModalSignOpen} onClose={() => setIsModalSignOpen(false)} onSwitch={switchToLogin} />
+      <ModalSign isOpen={isModalSignOpen} onClose={() => setIsModalSignOpen(false)} onSwitch={switchToLogin}loginUser={loginUser} />
     </div>
   );
 };
