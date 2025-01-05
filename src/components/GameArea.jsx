@@ -4,10 +4,10 @@ import database from '../firebaseConfig'
 import { ref, get, push } from 'firebase/database'
 import { Case } from './Case'
 
-export const GameArea = ({ user }) => {
+export const GameArea = ({ user, isWon, setIsWon }) => {
 	const [walls, setWalls] = useState(null)
 	const [playerPosition, setPlayerPosition] = useState([0, 0])
-	const [isWon, setIsWon] = useState(false)
+
 	const [steps, setSteps] = useState(0)
 
 	const labSize = 30
@@ -47,6 +47,7 @@ export const GameArea = ({ user }) => {
 			}
 		}
 		sendScore()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isWon, steps])
 
 	useEffect(() => {

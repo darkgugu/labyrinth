@@ -6,12 +6,13 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import database from '../firebaseConfig'
 import { ref, get } from 'firebase/database'
 
-export const Leaderboard = () => {
+export const Leaderboard = ({ isWon }) => {
 	const [date, setDate] = useState(new Date())
 	const [leaderboard, setLeaderboard] = useState([])
 
 	useEffect(() => {
 		const fetchScores = async () => {
+			setLeaderboard([])
 			try {
 				const snapshot = await get(ref(database, 'scores'))
 				if (snapshot.exists()) {
@@ -28,7 +29,7 @@ export const Leaderboard = () => {
 		}
 
 		fetchScores()
-	}, [])
+	}, [isWon])
 
 	const convertDate = (date) => {
 		let newDate = ''
