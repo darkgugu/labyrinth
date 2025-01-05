@@ -192,21 +192,15 @@ export const GameArea = ({ user, isWon, setIsWon }) => {
 		return true
 	}
 
-	const test = () => {
-		console.log('test')
-	}
-
-	if (isWon) {
-		test()
-		console.log('You won in', steps, 'steps')
-	}
-
 	return (
 		<div className="GameArea">
 			<div className="gameWindow">
-				{!isWon ? caseArray : <p>Bravo !</p>}
+				{!isWon ? (
+					caseArray
+				) : (
+					<p>Bravo ! Tu as terminé en {steps} mouvements !</p>
+				)}
 			</div>
-			{/* <Mask /> */}
 		</div>
 	)
 }

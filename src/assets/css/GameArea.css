@@ -12,6 +12,8 @@
   background-color: aliceblue;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 @media (min-width: 1200px) {
   .GameArea .gameWindow {
