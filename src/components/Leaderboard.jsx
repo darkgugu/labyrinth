@@ -1,12 +1,36 @@
 import '../assets/css/Leaderboard.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import database from '../firebaseConfig'
+import { ref, get } from 'firebase/database'
 
 export const Leaderboard = () => {
 	const [date, setDate] = useState(new Date())
-	const leaderboard = [
+	const [leaderboard, setLeaderboard] = useState([])
+
+	useEffect(() => {
+		const fetchScores = async () => {
+			try {
+				const snapshot = await get(ref(database, 'scores'))
+				if (snapshot.exists()) {
+					console.log(snapshot.val())
+					Object.keys(snapshot.val()).forEach((key) =>
+						setLeaderboard((prev) => [...prev, snapshot.val()[key]])
+					)
+				} else {
+					console.log('Error')
+				}
+			} catch (error) {
+				console.error('Error fetching leaderboard data:', error)
+			}
+		}
+
+		fetchScores()
+	}, [])
+
+	/* const leaderboard = [
 		{ name: 'Joueur1', score: '100', date: '2024-12-07' },
 		{ name: 'Joueur2', score: '600', date: '2024-12-07' },
 		{ name: 'Joueur3', score: '800', date: '2024-12-07' },
@@ -35,7 +59,7 @@ export const Leaderboard = () => {
 		{ name: 'Joueur26', score: '860', date: '2024-11-29' },
 		{ name: 'Joueur27', score: '920', date: '2024-11-29' },
 	]
-
+ */
 	const yesterday = () => {
 		setDate(new Date(date.setDate(date.getDate() - 1)))
 	}
@@ -95,7 +119,7 @@ export const Leaderboard = () => {
 							)
 							.sort((a, b) => b.score - a.score)
 							.map((player, index) => (
-								<p key={index}>{player.name}</p>
+								<p key={index}>{player.user}</p>
 							))}
 					</div>
 					<div className="rowScore">
