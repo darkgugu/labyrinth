@@ -86,7 +86,7 @@ export const Leaderboard = ({ isWon }) => {
 									player.date ===
 									date.toISOString().split('T')[0]
 							)
-							.sort((a, b) => b.score - a.score)
+							.sort((a, b) => a.score - b.score)
 							.map((player, index) => (
 								<p key={index}>{player.user}</p>
 							))}
@@ -99,7 +99,7 @@ export const Leaderboard = ({ isWon }) => {
 									player.date ===
 									date.toISOString().split('T')[0]
 							)
-							.sort((a, b) => b.score - a.score)
+							.sort((a, b) => a.score - b.score)
 							.map((player, index) => (
 								<p key={index}>{player.score}</p>
 							))}
