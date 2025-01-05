@@ -4,6 +4,10 @@
     height: 100%;
     .leftPart{
         width: 50%;
+        // Code added for responsiveness on laptop ????
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
     }
     .rightPart{
         width: 50%;

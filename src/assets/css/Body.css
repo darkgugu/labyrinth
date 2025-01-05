@@ -5,6 +5,9 @@
 }
 .Body .leftPart {
   width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 .Body .rightPart {
   width: 50%;

@@ -1,8 +1,10 @@
 import '../assets/css/GameArea.css'
 import React, { useState, useEffect } from 'react'
 import database from '../firebaseConfig'
-import { ref, get } from 'firebase/database'
+import { ref, get, push } from 'firebase/database'
 import { Case } from './Case'
+
+//TEST
 
 export const GameArea = () => {
 	const [walls, setWalls] = useState(null)
@@ -30,6 +32,24 @@ export const GameArea = () => {
 
 		fetchWalls()
 	}, [])
+
+	useEffect(() => {
+		const sendScore = async () => {
+			if (isWon) {
+				try {
+					console.log('Sending score:', steps)
+					await push(ref(database, `scores`), {
+						user: 'test',
+						score: steps,
+						date: new Date().toISOString().split('T')[0],
+					})
+				} catch (error) {
+					console.error('Error sending score:', error)
+				}
+			}
+		}
+		sendScore()
+	}, [isWon, steps])
 
 	useEffect(() => {
 		const handleKeyDown = (e) => {
@@ -173,7 +193,12 @@ export const GameArea = () => {
 		return true
 	}
 
+	const test = () => {
+		console.log('test')
+	}
+
 	if (isWon) {
+		test()
 		console.log('You won in', steps, 'steps')
 	}
 
