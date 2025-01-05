@@ -168,4 +168,19 @@
 .user-info span {
   margin-right: 1rem;
   font-weight: bold;
+}
+
+.error-text {
+  color: red;
+  font-size: 14px;
+  margin-top: 1px;
+  display: flex;
+  justify-content: center;
+}
+
+.success-text {
+  color: green;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
 }/*# sourceMappingURL=Header.css.map */

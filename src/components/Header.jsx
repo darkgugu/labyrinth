@@ -15,32 +15,31 @@ const database = getDatabase();
 const ModalLog = ({ isOpen, onClose, onSwitch, loginUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [user, setUser] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(''); // Ajout de l'état pour gérer les erreurs
 
   const isEmailValid = email.includes('@') && /[a-zA-Z]/.test(email);
   const isFormValid = isEmailValid && password; 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage(''); // Réinitialiser l'erreur avant chaque tentative de connexion
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      setUser(user.email); 
+      loginUser(user.email);
       onClose(); 
     } catch (error) {
+      setErrorMessage('Identifiants incorrects');
       console.error('Erreur lors de la connexion:', error.message);
-      alert('Connexion échouée : ' + error.message);
     }
   };
-  
+
   if (!isOpen) return null;
-
-
 
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-      <button className="close-button" onClick={onClose}>×</button>
+        <button className="close-button" onClick={onClose}>×</button>
         <h2>Connexion</h2>
         <form onSubmit={handleSubmit} className="border-bottom">
           <label>Email:</label>
@@ -56,43 +55,46 @@ const ModalLog = ({ isOpen, onClose, onSwitch, loginUser }) => {
             placeholder="Entrez votre mot de passe"
             value={password}
             onChange={(e)=> setPassword(e.target.value)}
-           />
+          />
           <button 
             className={`disabled ${isFormValid ? 'enabled' : ''}`}
             type="submit"
             disabled={!isFormValid}
-            >
-              Se connecter
-              </button>
+          >
+            Se connecter
+          </button>
+         
         </form>
         <p className="switch-text">
-          Déja un compte ? <span onClick={onSwitch} className="switch-link">Connectez-vous !</span>
+        {errorMessage && <p className="error-text">{errorMessage}</p>} {/* Affichage du message d'erreur */}
+          Déjà un compte ? <span onClick={onSwitch} className="switch-link">Connectez-vous !</span>
         </p>
-        
       </div>
     </div>
   );
 };
 
-
-const ModalSign = ({ isOpen, onClose, onSwitch}) => {
+const ModalSign = ({ isOpen, onClose, onSwitch }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [username, setUsername] = useState('');
-  const [error, setError] = useState(''); 
+  const [errorMessage, setErrorMessage] = useState(''); // Gérer les erreurs
+  const [successMessage, setSuccessMessage] = useState(''); // Gérer les succès
 
   const isEmailValid = email.includes('@') && /[a-zA-Z]/.test(email);
   const isFormValid = isEmailValid && password && confirmPassword && password === confirmPassword;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+    setErrorMessage(''); // Réinitialiser l'erreur avant chaque tentative d'inscription
+    setSuccessMessage(''); // Réinitialiser le message de succès
+
     try {
-      // Vérifier si le username est déjà pris
+      // Vérifier si le nom d'utilisateur est déjà pris
       const dbRef = ref(database);
       const snapshot = await get(child(dbRef, 'users/'));
-  
+
       let isUsernameTaken = false;
       snapshot.forEach((childSnapshot) => {
         const userData = childSnapshot.val();
@@ -100,46 +102,54 @@ const ModalSign = ({ isOpen, onClose, onSwitch}) => {
           isUsernameTaken = true;
         }
       });
-  
+
       if (isUsernameTaken) {
-        alert("Ce nom d'utilisateur est déjà pris. Veuillez en choisir un autre.");
+        setErrorMessage("Ce nom d'utilisateur est déjà pris. Veuillez en choisir un autre.");
         return;
       }
-  
-      // Créer un utilisateur avec l'authentification Firebase
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
-  
-      // Ajouter les informations de l'utilisateur (y compris le username) dans Realtime Database
-      await set(ref(database, 'users/' + user.uid), {
-        username: username,  
-        email: email,        
-        createdAt: new Date().toISOString(), 
-      });
-  
-      alert('Inscription réussie !');
-      setEmail('');
-      setPassword('');
-      setConfirmPassword('');
-      setUsername('');
+
+      // Tenter de créer un utilisateur avec Firebase Auth
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        // Ajouter les informations de l'utilisateur dans Realtime Database
+        await set(ref(database, 'users/' + user.uid), {
+          username: username,
+          email: email,
+          createdAt: new Date().toISOString(),
+        });
+
+        setSuccessMessage('Inscription réussie !'); // Afficher le message de succès
+        setEmail('');
+        setPassword('');
+        setConfirmPassword('');
+        setUsername('');
+
+        // Fermer la modale après une courte pause
+        setTimeout(() => {
+          setSuccessMessage('');
+          onClose();
+        }, 2000);
+      } catch (authError) {
+        if (authError.code === 'auth/email-already-in-use') {
+          setErrorMessage("Cet email est déjà utilisé. Veuillez en essayer un autre.");
+        } else {
+          setErrorMessage("Erreur lors de l'inscription : " + authError.message);
+        }
+      }
     } catch (error) {
       console.error("Erreur lors de l'inscription:", error.message);
-      alert("Inscription échouée : " + error.message);
-    } finally {
-      onClose(); 
+      setErrorMessage("Une erreur inattendue s'est produite. Veuillez réessayer.");
     }
   };
-  
-  
-
-  
-  
 
   if (!isOpen) return null;
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-      <button className="close-button" onClick={onClose}>×</button>
+        <button className="close-button" onClick={onClose}>×</button>
         <h2>Inscription</h2>
         <form onSubmit={handleSubmit} className="border-bottom">
           <label>Email:</label>
@@ -147,35 +157,38 @@ const ModalSign = ({ isOpen, onClose, onSwitch}) => {
             type="email"
             placeholder="Entrez votre email" 
             value={email}
-            onChange={(e)=> setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <label>Nom d'utilisateur:</label>
           <input 
             type="text"
             placeholder="Entrez votre nom d'utilisateur" 
             value={username}
-            onChange={(e)=> setUsername(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
           />
           <label>Mot de passe:</label>
           <input 
             type="password" 
             placeholder="Entrez votre mot de passe"
             value={password}
-            onChange={(e)=> setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <label>Confirmation Mot de passe:</label>
           <input 
             type="password" 
             placeholder="Confirmez votre mot de passe" 
             value={confirmPassword}
-            onChange={(e)=> setConfirmPassword(e.target.value)}
-            />
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
           <button 
             className={`disabled ${isFormValid ? 'enabled' : ''}`}
             type="submit"
             disabled={!isFormValid}
-            >
-              S'inscrire</button>
+          >
+            S'inscrire
+          </button>
+          {errorMessage && <p className="error-text">{errorMessage}</p>} {/* Affichage du message d'erreur */}
+          {successMessage && <p className="success-text">{successMessage}</p>} {/* Affichage du message de succès */}
         </form>
         <p className="switch-text">
           Pas encore inscrit ? <span onClick={onSwitch} className="switch-link">Créer un compte</span>
@@ -184,6 +197,7 @@ const ModalSign = ({ isOpen, onClose, onSwitch}) => {
     </div>
   );
 };
+
 
 
 export const Header = () => {
