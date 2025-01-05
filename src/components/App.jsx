@@ -1,16 +1,15 @@
+import React from 'react'
 import '../assets/App.css'
 import { Footer } from './Footer'
 import { Header } from './Header'
 import { Body } from './Body'
 
-function App() {
+export default function App() {
 	return (
-		<div className="App">
+		<div className="App" data-testid="app">
 			<Header />
 			<Body />
 			<Footer />
 		</div>
 	)
 }
-
-export default App

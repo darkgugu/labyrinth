@@ -60,10 +60,8 @@ export const Leaderboard = () => {
 				return 'Octobre'
 			case 10:
 				return 'Novembre'
-			case 11:
-				return 'Décembre'
 			default:
-				return ''
+				return 'Décembre'
 		}
 	}
 
@@ -75,7 +73,7 @@ export const Leaderboard = () => {
 	}
 
 	return (
-		<div className="Leaderboard">
+		<div className="Leaderboard" data-testid="leaderboard">
 			<div className="leaderboardWindow">
 				<div className="title">Leaderboard</div>
 				<div className="rows">
@@ -108,11 +106,19 @@ export const Leaderboard = () => {
 				</div>
 				<div className="date">
 					<button onClick={yesterday}>
-						<FontAwesomeIcon icon={faArrowLeft} size="1x" />
+						<FontAwesomeIcon
+							data-testid="yesterday"
+							icon={faArrowLeft}
+							size="1x"
+						/>
 					</button>
-					<p>{convertDate(date)}</p>
+					<p data-testid="date">{convertDate(date)}</p>
 					<button onClick={tomorrow}>
-						<FontAwesomeIcon icon={faArrowRight} size="1x" />
+						<FontAwesomeIcon
+							data-testid="tomorrow"
+							icon={faArrowRight}
+							size="1x"
+						/>
 					</button>
 				</div>
 			</div>

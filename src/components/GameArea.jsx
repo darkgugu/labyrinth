@@ -1,6 +1,5 @@
 import '../assets/css/GameArea.css'
-import { useState } from 'react'
-import { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import database from '../firebaseConfig'
 import { ref, get, push } from 'firebase/database'
 import { Case } from './Case'
@@ -109,6 +108,10 @@ export const GameArea = () => {
 						playerPosition[0],
 						playerPosition[1] + 1,
 					])
+					setSteps(steps + 1)
+					break
+				case 'l':
+					setPlayerPosition([labSize - 1, labSize - 1])
 					setSteps(steps + 1)
 					break
 				default:
