@@ -74,7 +74,7 @@ const ModalLog = ({ isOpen, onClose, onSwitch, loginUser }) => {
   );
 };
 
-const ModalSign = ({ isOpen, onClose, onSwitch }) => {
+const ModalSign = ({ isOpen, onClose, onSwitch, loginUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -91,7 +91,6 @@ const ModalSign = ({ isOpen, onClose, onSwitch }) => {
     setSuccessMessage(''); // Réinitialiser le message de succès
 
     try {
-      // Vérifier si le nom d'utilisateur est déjà pris
       const dbRef = ref(database);
       const snapshot = await get(child(dbRef, 'users/'));
 
@@ -108,29 +107,25 @@ const ModalSign = ({ isOpen, onClose, onSwitch }) => {
         return;
       }
 
-      // Tenter de créer un utilisateur avec Firebase Auth
       try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
-        // Ajouter les informations de l'utilisateur dans Realtime Database
         await set(ref(database, 'users/' + user.uid), {
           username: username,
           email: email,
           createdAt: new Date().toISOString(),
         });
 
-        setSuccessMessage('Inscription réussie !'); // Afficher le message de succès
+        // Connecter l'utilisateur immédiatement après inscription
+        loginUser(username);
+
+        setSuccessMessage('Inscription réussie et connexion effectuée !'); // Message combiné
         setEmail('');
         setPassword('');
         setConfirmPassword('');
         setUsername('');
-
-        // Fermer la modale après une courte pause
-        setTimeout(() => {
-          setSuccessMessage('');
-          onClose();
-        }, 2000);
+        onClose(); // Fermer la modale immédiatement
       } catch (authError) {
         if (authError.code === 'auth/email-already-in-use') {
           setErrorMessage("Cet email est déjà utilisé. Veuillez en essayer un autre.");
