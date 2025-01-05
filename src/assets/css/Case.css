@@ -7,10 +7,10 @@
   justify-content: center;
   align-items: center;
 }
-@media (min-width: 1200px) {
+@media (max-height: 800px) {
   .Case {
-    width: 1.2em;
-    height: 1.2em;
+    width: 0.9em;
+    height: 0.9em;
   }
 }
 .Case #player {

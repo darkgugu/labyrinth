@@ -15,9 +15,9 @@
   justify-content: center;
   align-items: center;
 }
-@media (min-width: 1200px) {
+@media (max-height: 800px) {
   .GameArea .gameWindow {
-    width: 40em;
-    height: 40em;
+    width: 30em;
+    height: 30em;
   }
 }/*# sourceMappingURL=GameArea.css.map */

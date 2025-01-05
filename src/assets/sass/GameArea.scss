@@ -9,9 +9,9 @@
         border: 1px solid black;
         width: 600px;
         height: 600px;
-        @media (min-width: 1200px) {
-            width: 40em;
-            height: 40em;
+        @media (max-height: 800px) {
+            width: 30em;
+            height: 30em;
         }
         background-color: aliceblue;
         display: flex;
