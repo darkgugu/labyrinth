@@ -46,7 +46,9 @@ export const GameArea = ({ user, isWon, setIsWon }) => {
 				}
 			}
 		}
-		sendScore()
+		if (user !== null) {
+			sendScore()
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isWon, steps])
 
