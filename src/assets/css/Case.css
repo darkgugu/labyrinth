@@ -9,8 +9,8 @@
 }
 @media (min-width: 1200px) {
   .Case {
-    width: 15px;
-    height: 15px;
+    width: 1.2em;
+    height: 1.2em;
   }
 }
 .Case #player {

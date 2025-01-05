@@ -17,7 +17,7 @@
 }
 @media (min-width: 1200px) {
   .GameArea .gameWindow {
-    width: 510px;
-    height: 510px;
+    width: 40em;
+    height: 40em;
   }
 }/*# sourceMappingURL=GameArea.css.map */
