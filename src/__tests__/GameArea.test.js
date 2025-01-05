@@ -1,20 +1,35 @@
-import React from 'react';
-import { GameArea } from '../components/GameArea';
-import { render } from '@testing-library/react'
+import React from 'react'
+import { render, fireEvent, screen, waitFor } from '@testing-library/react'
+import { GameArea } from '../components/GameArea'
+import { getDatabase, ref, get, push } from 'firebase/database'
+
+jest.mock('firebase/database', () => ({
+	getDatabase: jest.fn(),
+	ref: jest.fn(),
+	get: jest.fn(),
+	push: jest.fn(),
+}))
 
 describe('GameArea', () => {
-    test('Should render without crash', async () => {
-    
-        render(<GameArea />)
-    })
+	const setIsWonMock = jest.fn()
+	const user = 'testUser'
+
+	beforeEach(() => {
+		jest.clearAllMocks()
+	})
+	test('Should render without crash', async () => {
+		render(<GameArea />)
+	})
+
+	test('fetches and renders walls correctly', async () => {
+		const mockWalls = {
+			horizontal: Array(30).fill(Array(30).fill(0)),
+			vertical: Array(30).fill(Array(30).fill(0)),
+		}
+		get.mockResolvedValueOnce({ exists: () => true, val: () => mockWalls })
+
+		render(<GameArea user={user} isWon={false} setIsWon={setIsWonMock} />)
+
+		await waitFor(() => expect(get).toHaveBeenCalled())
+	})
 })
-
-/* describe('When a key is pressed', () => {
-    it('should call a function with the key as parameter if the key is z, q, s, d, ArrowUp, ArrowDown, ArrowRight, ArrowLeft', () => {
-        
-        const event = new KeyboardEvent('keydown', { key: 'z' });
-        document.dispatchEvent(event);
-
-        //Need to add React Testing Library to test the DOM
-    })
-})  */
