@@ -1,9 +1,9 @@
 .Case{
-    width: 38px;
-    height: 38px;
-    @media (min-width: 1200px) {
-        width: 15px;
-        height: 15px;
+    width: 1.2em;
+    height: 1.2em;
+    @media (max-height: 800px) {
+        width: 0.9em;
+        height: 0.9em;
     }
     background-color: aliceblue;
     border: 1px solid aliceblue;

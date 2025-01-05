@@ -7,15 +7,17 @@
 }
 .GameArea .gameWindow {
   border: 1px solid black;
-  width: 600px;
-  height: 600px;
+  width: 40em;
+  height: 40em;
   background-color: aliceblue;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
-@media (min-width: 1200px) {
+@media (max-height: 800px) {
   .GameArea .gameWindow {
-    width: 510px;
-    height: 510px;
+    width: 30em;
+    height: 30em;
   }
 }/*# sourceMappingURL=GameArea.css.map */

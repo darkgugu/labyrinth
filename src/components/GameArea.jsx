@@ -1,16 +1,13 @@
 import '../assets/css/GameArea.css'
-import { useState } from 'react'
-import { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import database from '../firebaseConfig'
 import { ref, get, push } from 'firebase/database'
 import { Case } from './Case'
 
-//TEST
-
-export const GameArea = () => {
+export const GameArea = ({ user, isWon, setIsWon }) => {
 	const [walls, setWalls] = useState(null)
 	const [playerPosition, setPlayerPosition] = useState([0, 0])
-	const [isWon, setIsWon] = useState(false)
+
 	const [steps, setSteps] = useState(0)
 
 	const labSize = 30
@@ -40,7 +37,7 @@ export const GameArea = () => {
 				try {
 					console.log('Sending score:', steps)
 					await push(ref(database, `scores`), {
-						user: 'test',
+						user: user,
 						score: steps,
 						date: new Date().toISOString().split('T')[0],
 					})
@@ -50,6 +47,7 @@ export const GameArea = () => {
 			}
 		}
 		sendScore()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isWon, steps])
 
 	useEffect(() => {
@@ -109,6 +107,10 @@ export const GameArea = () => {
 						playerPosition[0],
 						playerPosition[1] + 1,
 					])
+					setSteps(steps + 1)
+					break
+				case 'l':
+					setPlayerPosition([labSize - 1, labSize - 1])
 					setSteps(steps + 1)
 					break
 				default:
@@ -190,21 +192,15 @@ export const GameArea = () => {
 		return true
 	}
 
-	const test = () => {
-		console.log('test')
-	}
-
-	if (isWon) {
-		test()
-		console.log('You won in', steps, 'steps')
-	}
-
 	return (
 		<div className="GameArea">
 			<div className="gameWindow">
-				{!isWon ? caseArray : <p>Bravo !</p>}
+				{!isWon ? (
+					caseArray
+				) : (
+					<p>Bravo ! Tu as terminé en {steps} mouvements !</p>
+				)}
 			</div>
-			{/* <Mask /> */}
 		</div>
 	)
 }

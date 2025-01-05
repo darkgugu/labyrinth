@@ -11,7 +11,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.9",
-    "firebase": "^11.1.0",
+    "firebase": "^11.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
@@ -21,9 +21,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
     "cypress:open": "npm start & npx cypress open"
+    "test": "jest --coverage",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -45,5 +45,24 @@
   },
   "devDependencies": {
     "cypress": "^13.17.0"
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.26.3",
+    "babel-jest": "^29.7.0",
+    "jest": "^27.5.1"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "collectCoverage": true,
+    "coverageReporters": [
+      "html"
+    ],
+    "moduleNameMapper":{
+         "\\.(css|less|sass|scss)$": "identity-obj-proxy"
+    },
+    "setupFilesAfterEnv": ["<rootDir>/src/setupTests.js"],
+    "roots": [
+      "<rootDir>/src"
+    ]
   }
 }
