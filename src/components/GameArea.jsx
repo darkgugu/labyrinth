@@ -4,9 +4,7 @@ import database from '../firebaseConfig'
 import { ref, get, push } from 'firebase/database'
 import { Case } from './Case'
 
-//TEST
-
-export const GameArea = () => {
+export const GameArea = ({ user }) => {
 	const [walls, setWalls] = useState(null)
 	const [playerPosition, setPlayerPosition] = useState([0, 0])
 	const [isWon, setIsWon] = useState(false)
@@ -39,7 +37,7 @@ export const GameArea = () => {
 				try {
 					console.log('Sending score:', steps)
 					await push(ref(database, `scores`), {
-						user: 'test',
+						user: user,
 						score: steps,
 						date: new Date().toISOString().split('T')[0],
 					})

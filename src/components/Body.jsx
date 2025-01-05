@@ -5,11 +5,11 @@ import { GameArea } from './GameArea'
 import { Leaderboard } from './Leaderboard'
 import { Rules } from './Rules'
 
-export const Body = () => {
+export const Body = ({ user }) => {
 	return (
 		<div className="Body" data-testid="body">
 			<div className="leftPart">
-				<GameArea />
+				<GameArea user={user} />
 				<Commands />
 			</div>
 			<div className="rightPart">
