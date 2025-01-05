@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import '../assets/css/Case.css'
 
 export const Case = ({
@@ -10,9 +10,16 @@ export const Case = ({
 	borderRight,
 	borderBottom,
 }) => {
+	const [isVisited, setIsVisited] = useState()
 	useEffect(() => {
 		if (isPlayerHere && winningCase) {
 			onWin()
+		}
+		if (isPlayerHere) {
+			setIsVisited(true)
+		}
+		if (winningCase) {
+			setIsVisited(true)
 		}
 	}, [isPlayerHere, winningCase, onWin])
 
@@ -28,6 +35,7 @@ export const Case = ({
 		>
 			{isPlayerHere ? <div id="player"></div> : null}
 			{winningCase ? <div id="winningCase"></div> : null}
+			{/* isVisited ? <Mask /> : null */}
 		</div>
 	)
 }

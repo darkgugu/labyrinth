@@ -9,18 +9,18 @@
 }
 @media (min-width: 1200px) {
   .Case {
-    width: 32.4px;
-    height: 32px;
+    width: 15px;
+    height: 15px;
   }
 }
 .Case #player {
   background-color: red;
-  height: 15px;
-  width: 15px;
+  height: 10px;
+  width: 10px;
 }
 .Case #winningCase {
   background-color: green;
-  height: 15px;
-  width: 15px;
+  height: 10px;
+  width: 10px;
   border-radius: 10px;
 }/*# sourceMappingURL=Case.css.map */
