@@ -7,8 +7,8 @@
 }
 .GameArea .gameWindow {
   border: 1px solid black;
-  width: 600px;
-  height: 600px;
+  width: 40em;
+  height: 40em;
   background-color: aliceblue;
   display: flex;
   flex-wrap: wrap;
