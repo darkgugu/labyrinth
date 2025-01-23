@@ -7,7 +7,6 @@ import { Case } from './Case'
 export const GameArea = ({ user, isWon, setIsWon }) => {
 	const [walls, setWalls] = useState(null)
 	const [playerPosition, setPlayerPosition] = useState([0, 0])
-
 	const [steps, setSteps] = useState(0)
 
 	const labSize = 30
@@ -194,6 +193,10 @@ export const GameArea = ({ user, isWon, setIsWon }) => {
 		return true
 	}
 
+	if (isWon) {
+		console.log('You won in', steps, 'steps')
+	}
+
 	return (
 		<div className="GameArea">
 			<div className="gameWindow">
@@ -203,6 +206,7 @@ export const GameArea = ({ user, isWon, setIsWon }) => {
 					<p>Bravo ! Tu as terminé en {steps} mouvements !</p>
 				)}
 			</div>
+			{/* <Mask /> */}
 		</div>
 	)
 }
