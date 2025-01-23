@@ -1,8 +1,9 @@
+import React from 'react'
 import '../assets/css/Rules.css'
 
 export const Rules = () => {
 	return (
-		<div className="Rules">
+		<div className="Rules" data-testid="rules">
 			<h2>Règles du jeu</h2>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed

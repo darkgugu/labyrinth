@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import '../assets/css/Case.css'
 
 export const Case = ({
@@ -19,6 +19,7 @@ export const Case = ({
 	return (
 		<div
 			className="Case"
+			data-testid="case"
 			style={{
 				borderLeft: `${borderLeft}`,
 				borderTop: `${borderTop}`,
@@ -26,9 +27,10 @@ export const Case = ({
 				borderBottom: `${borderBottom}`,
 			}}
 		>
-			{isPlayerHere ? <div id="player"></div> : null}
-			{winningCase ? <div id="winningCase"></div> : null}
-			{/* isVisited ? <Mask /> : null */}
+			{isPlayerHere ? <div id="player" data-testid="player"></div> : null}
+			{winningCase ? (
+				<div id="winningCase" data-testid="winningcase"></div>
+			) : null}
 		</div>
 	)
 }
