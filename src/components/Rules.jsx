@@ -6,11 +6,10 @@ export const Rules = () => {
 		<div className="Rules" data-testid="rules">
 			<h2>Règles du jeu</h2>
 			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-				eget eros efficitur, iaculis orci et, pulvinar justo. Vivamus a
-				diam vitae justo dictum mollis. Mauris sed urna maximus arcu
-				posuere rhoncus. Quisque ac dolor sagittis, venenatis nunc et,
-				mattis odio. risus.
+				Réussisez à aller au bout du labyrinthe en le moins de coup possible
+				pour arriver au sommet du leaderboard ! Vous pouvez jouer avec les
+				touches Z, Q, S, D, les touches directionelles ou en cliquant sur
+				les boutons à l'écran
 			</p>
 		</div>
 	)
